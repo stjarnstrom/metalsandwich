@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Stack Motion Hover Effects | Codrops</title>
+		<meta name="description" content="Item hover effects that reveal a colored stack behind the hovered item" />
+		<meta name="keywords" content="hover effect, reveal, hover, css, animations, anime.js, javascript, motion, ux" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="https://fonts.googleapis.com/css?family=Overpass+Mono:400,700" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<script>document.documentElement.className = 'js';</script>
+	</head>
+	<body>
+		<main>
+			<div class="message-mobile">This is a hover effect. Best viewed on desktop.</div>
+			<header class="codrops-header">
+			</header>
+			
+				<!--
+
+				1. Multi-functional Metal Sandwich solutions
+				2. Hub of metal sandwich knowlegde
+				3. Application areas
+				4. Early prototyping phases
+				5. Business case - battery platforms for vehicles
+				6. FAQ Metal Sandwich
+				7. Contacts
+
+				-->
+
+			<section class="content">
+				<div class="grid grid--effect-altair">
+					<a href="#" class="grid__item grid__item--c1">
+						<div class="stack">
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__figure">
+								<img class="stack__img" src="img/1.png" alt="Image"/>
+							</div>
+						</div>
+						<div class="grid__item-caption">
+							<h3 class="grid__item-title">Introduction</h3>
+						</div>
+					</a>
+					<a href="#" class="grid__item grid__item--c2">
+						<div class="stack">
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__figure">
+								<img class="stack__img" src="img/2.png" alt="Image"/>
+							</div>
+						</div>
+						<div class="grid__item-caption">
+							<h3 class="grid__item-title">Knowledge Base</h3>
+						</div>
+					</a>
+					<a href="#" class="grid__item grid__item--c3">
+						<div class="stack">
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__figure">
+								<img class="stack__img" src="img/3.png" alt="Image"/>
+							</div>
+						</div>
+						<div class="grid__item-caption">
+							<h3 class="grid__item-title">Applications</h3>
+						</div>
+					</a>
+					<a href="#" class="grid__item grid__item--c2">
+						<div class="stack">
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__figure">
+								<img class="stack__img" src="img/4.png" alt="Image"/>
+							</div>
+						</div>
+						<div class="grid__item-caption">
+							<h3 class="grid__item-title">Early Prototyping</h3>
+						</div>
+					</a>					
+				</div>
+				<div class="grid grid--effect-altair">
+					<a href="#" class="grid__item grid__item--c3">
+						<div class="stack">
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__figure">
+								<img class="stack__img" src="img/5.png" alt="Image"/>
+							</div>
+						</div>
+						<div class="grid__item-caption">
+							<h3 class="grid__item-title">Case Study</h3>
+						</div>
+					</a>
+					<a href="#" class="grid__item grid__item--c1">
+						<div class="stack">
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__figure">
+								<img class="stack__img" src="img/1.png" alt="Image"/>
+							</div>
+						</div>
+						<div class="grid__item-caption">
+							<h3 class="grid__item-title">FAQ</h3>
+						</div>
+					</a>	
+					<a href="#" class="grid__item grid__item--c3">
+						<div class="stack">
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__deco"></div>
+							<div class="stack__figure">
+								<img class="stack__img" src="img/2.png" alt="Image"/>
+							</div>
+						</div>
+						<div class="grid__item-caption">
+							<h3 class="grid__item-title">Contact Info</h3>
+						</div>
+					</a>	
+					
+				</div>				
+			</section>
+
+			
+
+		</main>
+		<script src="js/anime.min.js"></script>
+		<script src="js/main.js"></script>
+		<script>
+		(function() {
+			[].slice.call(document.querySelectorAll('.grid--effect-altair > .grid__item')).forEach(function(stackEl) {
+				new AltairFx(stackEl);
+			});
+		})();
+		</script>
+	</body>
+</html>
