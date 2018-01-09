@@ -1,3 +1,4 @@
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}body{margin:0;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;margin:0.67em 0;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:bold;}dfn{font-style:italic;}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em;}pre{white-space:pre-wrap;}q{quotes:"\201C" "\201D" "\2018" "\2019";}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em;}sub{bottom:-0.25em;}img{border:0;}svg:not(:root){overflow:hidden;}figure{margin:0;}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em;}legend{border:0;padding:0;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;}button,input{line-height:normal;}button,select{text-transform:none;}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;}button[disabled],html input[disabled]{cursor:default;}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}
 *,
 *::after,
 *::before {
@@ -11,7 +12,12 @@ body {
 	background: #37373e;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
 }
+
+/**/
+
+/**/
 
 a {
 	text-decoration: none;
@@ -51,71 +57,6 @@ a:focus {
 	background: #ff3d53;
 }
 
-/* Header */
-.codrops-header {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: center;
-	width: 100%;
-	padding: 1.5em 1.5em 4em;
-	text-align: left;
-}
-
-.codrops-header__title {
-	font-size: 1.15em;
-	margin: 0;
-	padding: 0 0.5em;
-}
-
-.codrops-header__tagline {
-	font-size: 0.85em;
-	width: 100%;
-	margin: 0;
-	color: #b0adad;
-}
-
-.codrops-header__tagline::before {
-	content: '> ';
-}
-
-.github {
-	font-size: 0.85em;
-	font-weight: bold;
-	margin: 0 0 0 auto;
-}
-
-/* Top Navigation Style */
-.codrops-links {
-	position: relative;
-	display: flex;
-	justify-content: center;
-	text-align: center;
-	white-space: nowrap;
-}
-
-.codrops-links::after {
-	content: '';
-	position: absolute;
-	top: 20%;
-	left: 50%;
-	width: 1px;
-	height: 60%;
-	background: #b0adad;
-	transform: rotate3d(0, 0, 1, 22.5deg);
-}
-
-.codrops-icon {
-	display: inline-block;
-	margin: 0.25em 0 0.25em 0.25em;
-	padding: 0.35em 0 0.35em 0.35em;
-}
-
-.codrops-icon:first-child {
-	margin: 0.25em 0.25em 0.25em 0;
-	padding: 0.35em 0.35em 0.35em 0;
-}
-
 /* Content */
 .content {
 	position: relative;
@@ -151,7 +92,7 @@ a:focus {
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	padding: 0 7em;
+	padding: 0 5em;
 	perspective: 800px;
 	perspective-origin: 50% 100%;
 }
@@ -160,8 +101,8 @@ a:focus {
 	position: relative;
 	display: block;
 	flex: none;
-	width: 250px;
-	margin: 1.5em 2vw;
+	width: 190px;
+	margin: 1.0em 1vw;
 	cursor: default;
 	transform-style: preserve-3d;
 }
@@ -192,7 +133,7 @@ a:focus {
 .stack {
 	position: relative;
 	width: 100%;
-	height: 200px;
+	height: 140px;
 	transform-style: preserve-3d;
 }
 
@@ -469,4 +410,31 @@ a:focus {
 	.message-mobile {
 		display: block;
 	}
+}
+
+/* rob */
+
+.logotype {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    width: 160px;
+}
+
+.logotype img {
+    width: 100%;
+    height: auto;
+}
+
+.swerea-demo {
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+}
+
+.chapter-index {
+	position: absolute;
+	bottom: 3vw;
+
 }
