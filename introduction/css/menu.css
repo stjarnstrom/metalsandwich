@@ -233,3 +233,7 @@
   transform: translateX(50%);
   opacity: 0;
 }
+
+.play-me-symbol {
+  width: 120px;
+}

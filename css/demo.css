@@ -525,7 +525,7 @@ a:focus {
 
 .video-thumbnail {
 	position: absolute;
-	top: 6vw;
+	top: 8vw;
 }
 
 .video-thumbnail .video__img {
@@ -548,8 +548,8 @@ a:focus {
 }
 
 .video-thumbnail .video__img:hover {
-	transform: scale3d(1.1, 1.2, 1.1) translateY(+20px);
-	box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+	transform: scale3d(1.05, 1.1, 1.05) translateY(+20px);
+	box-shadow: 0 25px 55px rgba(0, 0, 0, 0.5);
 }
 
 .video-thumbnail .video__img:hover img {

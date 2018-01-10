@@ -29,6 +29,7 @@ body {
     --color-link-hover: #415bf8;
     --color-stitle: #f1f1f1;
     --fontsize-stitle: 12vw;
+    --fontsize-ssubtitle: 4vw;
     --color-nav: #fff;
     --color-nav-hover: #415bf8;
 }
@@ -271,6 +272,15 @@ a.demo--current {
 .slide__title {
 	position: relative;
 	font-size: var(--fontsize-stitle);
+	margin: 0;
+	cursor: default;
+	line-height: 1;
+	color: var(--color-stitle);
+}
+
+.slide__subtitle {
+	position: relative;
+	font-size: var(--fontsize-ssubtitle);
 	margin: 0;
 	cursor: default;
 	line-height: 1;
