@@ -8,12 +8,10 @@
 		<meta name="keywords" content="hover effect, reveal, hover, css, animations, anime.js, javascript, motion, ux" />
 		<meta name="author" content="Codrops" />
 		<link rel="shortcut icon" href="favicon.ico">
-		<link href="https://fonts.googleapis.com/css?family=Overpass+Mono:400,700" rel="stylesheet">
-		<!-- <link rel="stylesheet" type="text/css" href="css/normalize.css" /> -->
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<script>document.documentElement.className = 'js';</script>
 	</head>
-	<body class="demo-6">
+	<body class="demo-6 loading">
 		<main>
 			<div class="message-mobile">This is a hover effect. Best viewed on desktop.</div>
 			<header class="video-header">
@@ -35,6 +33,15 @@
 				-->
 
 			<div class="swerea-demo">
+				<section class="content video-thumbnail">
+					<div class="grid grid-effect-altair" style="width: 100vw";>
+						<a href="#" class="grid__item" style="width: 60vw">
+							<div class="video__img" style="background-image: url(img/video.jpg)">
+								<img src="img/play-alt.svg">
+							</div>		
+						</a>
+					</div>
+				</section>
 				<section class="content chapter-index">
 					<div class="grid grid--effect-altair">
 						<a href="introduction/index.html" data-slideshow="introduction" class="grid__item grid__item--c1">
@@ -148,16 +155,35 @@
 			<img src="./img/swerea_mefos_logotype_320.png" alt="Swerea Mefos">
 		</nav>
 
-
+		<div class="chapter-breadcrumb">
+			<h3>Metal Sandwich&trade; Demonstrator</h3>
+		</div>
 
 		<script src="js/anime.min.js"></script>
+		<script src="js/imagesloaded.pkgd.min.js"></script>		
 		<script src="js/main.js"></script>
 		<script>
+			{
+				setTimeout(() => document.body.classList.add('render'), 60);
+				const navdemos = Array.from(document.querySelectorAll('nav.demos > .demo'));
+				const navigate = (linkEl) => {
+					document.body.classList.remove('render');
+					document.body.addEventListener('transitionend', () => window.location = linkEl.href);
+				};
+				navdemos.forEach(link => link.addEventListener('click', (ev) => {
+					ev.preventDefault();
+					navigate(ev.target);
+				}));
+			}
+
+
+
 		(function() {
 			[].slice.call(document.querySelectorAll('.grid--effect-altair > .grid__item')).forEach(function(stackEl) {
 				new AltairFx(stackEl);
 			});
 
+			imagesLoaded('.stack__img', { background: true }, () => document.body.classList.remove('loading'));
 
 		})();
 		</script>

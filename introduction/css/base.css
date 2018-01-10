@@ -6,7 +6,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 }
 
 html {
-	background: #fff;
+	background: #37373e;
 }
 
 body {
@@ -14,7 +14,7 @@ body {
 	min-height: 100vh;
 	color: #57585c;
 	color: var(--color-text);
-	background-color: #fff;
+	background-color: #37373e;
 	background-color: var(--color-bg);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

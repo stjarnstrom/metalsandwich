@@ -1,5 +1,5 @@
 .back {
-    font-family: "Lato", sans-serif;
+    /* font-family: "Lato", sans-serif; */
     font-size: 16px;
     position: fixed;
     top: 40px;
@@ -213,4 +213,23 @@
 .modenav__item.active {
   background: #fff;
   color: #222;
+}
+
+.chapter-breadcrumb {
+  /* font-family: "Lato", sans-serif; */
+  font-size: 16px;
+  position: fixed;
+  top: 40px;
+  left: 100px;
+  width: auto;
+}
+
+.chapter-breadcrumb h3 { 
+  transition: all 0.2s ease;    
+  margin: 0.25em; 
+}
+
+.back:hover .chapter-breadcrumb h3 {
+  transform: translateX(50%);
+  opacity: 0;
 }
