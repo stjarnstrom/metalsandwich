@@ -81,12 +81,12 @@ class Slideshow {
         this.DOM.titlesSlides = Array.from(this.DOM.titles.querySelectorAll('.slide'));
         this.DOM.nextCtrl = this.DOM.nav.querySelector('.slidenav__item--next');
         this.DOM.prevCtrl = this.DOM.nav.querySelector('.slidenav__item--prev');
+        this.DOM.backMenu = this.DOM.el.querySelector('.back');
         this.current = 0;
         this.createFrame(); 
         this.initEvents();
 
-        window.currentSlide = 0;
-        
+        window.currentSlide = 0;        
     }
     createFrame() {
         this.rect = this.DOM.el.getBoundingClientRect();
@@ -134,6 +134,10 @@ class Slideshow {
     initEvents() {
         this.DOM.nextCtrl.addEventListener('click', () => this.navigate('next'));
         this.DOM.prevCtrl.addEventListener('click', () => this.navigate('prev'));
+        this.DOM.backMenu.addEventListener('click', (ev) => { 
+            var number = ev.toElement.getAttribute("data-slideindex");
+            if (number !== null) this.navigateDirectlyTo(number);
+        });
         
         window.addEventListener('resize', debounce(() => {
             this.rect = this.DOM.el.getBoundingClientRect();
@@ -150,108 +154,109 @@ class Slideshow {
             }
         });
     }
-    // navigateDirectlyTo(number = 0) {
-    //     if ( this.isAnimating ) return false;
-    //     this.isAnimating = true;
+    /* direct */
+    navigateDirectlyTo(number = 0) {
+        if ( this.isAnimating ) return false;
+        this.isAnimating = true;
 
-    //     var SlideNavigation = new CustomEvent('slideNavigation', { 'detail': number });
-    //     document.dispatchEvent(SlideNavigation);
+        var SlideNavigation = new CustomEvent('slideNavigation', {'detail': {'number': number} });
+        document.dispatchEvent(SlideNavigation);
 
-    //     const animateShapeIn = anime({
-    //         targets: this.DOM.shape,
-    //         duration: this.settings.animation.shape.duration,
-    //         easing: this.settings.animation.shape.easing.in,
-    //         d: this.paths.final
-    //     });
+        const animateShapeIn = anime({
+            targets: this.DOM.shape,
+            duration: this.settings.animation.shape.duration,
+            easing: this.settings.animation.shape.easing.in,
+            d: this.paths.final
+        });
 
-    //     const animateSlides = () => {
-    //         return new Promise((resolve) => {
-    //             const currentSlide = this.DOM.slides[this.current];
-    //             anime({
-    //                 targets: currentSlide,
-    //                 duration: this.settings.animation.slides.duration,
-    //                 easing: this.settings.animation.slides.easing,
-    //                 //translateY: dir === 'next' ? this.rect.height : -1*this.rect.height,
-    //                 translateY: number > this.current ? this.rect.height : -1*this.rect.height,
-    //                 complete: () => {
-    //                     currentSlide.classList.remove('slide--current');
-    //                     resolve();
-    //                 }
-    //             });
+        const animateSlides = () => {
+            return new Promise((resolve) => {
+                const currentSlide = this.DOM.slides[this.current];
+                anime({
+                    targets: currentSlide,
+                    duration: this.settings.animation.slides.duration,
+                    easing: this.settings.animation.slides.easing,
+                    //translateY: dir === 'next' ? this.rect.height : -1*this.rect.height,
+                    translateY: (number > this.current) ? this.rect.height : -1*this.rect.height,
+                    complete: () => {
+                        currentSlide.classList.remove('slide--current');
+                        resolve();
+                    }
+                });
 
-    //             const currentTitleSlide = this.DOM.titlesSlides[this.current];
-    //             anime({
-    //                 targets: currentTitleSlide.children,
-    //                 duration: this.settings.animation.slides.duration,
-    //                 easing: this.settings.animation.slides.easing,
-    //                 // delay: (t,i,total) => dir === 'next' ? i*100 : (total-i-1)*100,
-    //                 // translateY: [0, dir === 'next' ? 100 : -100],
-    //                 delay: (t,i,total) => number > this.current ? i*100 : (total-i-1)*100,
-    //                 translateY: [0, number > this.current ? 100 : -100],
-    //                 opacity: [1,0],
-    //                 complete: () => {
-    //                     currentTitleSlide.classList.remove('slide--current');
-    //                     resolve();
-    //                 }
-    //             });
+                const currentTitleSlide = this.DOM.titlesSlides[this.current];
+                anime({
+                    targets: currentTitleSlide.children,
+                    duration: this.settings.animation.slides.duration,
+                    easing: this.settings.animation.slides.easing,
+                    // delay: (t,i,total) => dir === 'next' ? i*100 : (total-i-1)*100,
+                    // translateY: [0, dir === 'next' ? 100 : -100],
+                    delay: (t,i,total) => (number > this.current) ? i*100 : (total-i-1)*100,
+                    translateY: [0, (number > this.current) ? 100 : -100],
+                    opacity: [1,0],
+                    complete: () => {
+                        currentTitleSlide.classList.remove('slide--current');
+                        resolve();
+                    }
+                });
+
+                this.current = this.current + (number - this.current); // variance
+
+                const newSlide = this.DOM.slides[this.current];
+                newSlide.classList.add('slide--current');
+                anime({
+                    targets: newSlide,
+                    duration: this.settings.animation.slides.duration,
+                    easing: this.settings.animation.slides.easing,
+                    // translateY: [dir === 'next' ? -1*this.rect.height : this.rect.height,0]
+                    translateY: [number > this.current ? -1*this.rect.height : this.rect.height,0]
+                });
     
-    //             // this.current = dir === 'next' ? 
-    //             //     this.current < this.slidesTotal-1 ? this.current + 1 : 0 :
-    //             //     this.current > 0 ? this.current - 1 : this.slidesTotal-1; 
+                const newSlideImg = newSlide.querySelector('.slide__img');
                 
-    //             // const newSlide = this.DOM.slides[this.current];
-    //             // newSlide.classList.add('slide--current');
-    //             // anime({
-    //             //     targets: newSlide,
-    //             //     duration: this.settings.animation.slides.duration,
-    //             //     easing: this.settings.animation.slides.easing,
-    //             //     translateY: [dir === 'next' ? -1*this.rect.height : this.rect.height,0]
-    //             // });
-    
-    //             // const newSlideImg = newSlide.querySelector('.slide__img');
+                anime.remove(newSlideImg);
+                anime({
+                    targets: newSlideImg,
+                    duration: this.settings.animation.slides.duration*3,
+                    easing: this.settings.animation.slides.easing,
+                    //translateY: [dir === 'next' ? -100 : 100, 0],
+                    translateY: [number > this.current ? -100 : 100, 0],
+                    scale: [0.2,1]
+                });
                 
-    //             // anime.remove(newSlideImg);
-    //             // anime({
-    //             //     targets: newSlideImg,
-    //             //     duration: this.settings.animation.slides.duration*3,
-    //             //     easing: this.settings.animation.slides.easing,
-    //             //     translateY: [dir === 'next' ? -100 : 100, 0],
-    //             //     scale: [0.2,1]
-    //             // });
-                
-    //             // const newTitleSlide = this.DOM.titlesSlides[this.current];
-    //             // newTitleSlide.classList.add('slide--current');
-    //             // anime({
-    //             //     targets: newTitleSlide.children,
-    //             //     duration: this.settings.animation.slides.duration*1.5,
-    //             //     easing: this.settings.animation.slides.easing,
-    //             //     delay: (t,i,total) => dir === 'next' ? i*100+100 : (total-i-1)*100+100,
-    //             //     translateY: [dir === 'next' ? -100 : 100 ,0],
-    //             //     opacity: [0,1]
-    //             // });
-    //         });
-    //     };
+                const newTitleSlide = this.DOM.titlesSlides[this.current];
+                newTitleSlide.classList.add('slide--current');
+                anime({
+                    targets: newTitleSlide.children,
+                    duration: this.settings.animation.slides.duration*1.5,
+                    easing: this.settings.animation.slides.easing,
+                    //delay: (t,i,total) => dir === 'next' ? i*100+100 : (total-i-1)*100+100,
+                    //translateY: [dir === 'next' ? -100 : 100 ,0],
+                    delay: (t,i,total) => number > this.current ? i*100+100 : (total-i-1)*100+100,
+                    translateY: [number > this.current ? -100 : 100 ,0],
+                    opacity: [0,1]
+                });
+            });
+        };
 
-    //     const animateShapeOut = () => {
-    //         anime({
-    //             targets: this.DOM.shape,
-    //             duration: this.settings.animation.shape.duration,
-    //             easing: this.settings.animation.shape.easing.out,
-    //             d: this.paths.initial,
-    //             complete: () => this.isAnimating = false
-    //         });
-    //     }
+        const animateShapeOut = () => {
+            anime({
+                targets: this.DOM.shape,
+                duration: this.settings.animation.shape.duration,
+                easing: this.settings.animation.shape.easing.out,
+                d: this.paths.initial,
+                complete: () => this.isAnimating = false
+            });
+        }
 
-    //     animateShapeIn.finished.then(animateSlides).then(animateShapeOut);
-
-    //     console.log('navigateDirectlyTo: ' + number)    
-    // } // end of navigateDirectlyTo()
+        animateShapeIn.finished.then(animateSlides).then(animateShapeOut);
+    }
 
     navigate(dir = 'next') {
         if ( this.isAnimating ) return false;
         this.isAnimating = true;
 
-        var SlideNavigation = new CustomEvent('slideNavigation', { 'detail': dir }); // a okay
+        var SlideNavigation = new CustomEvent('slideNavigation', {'detail': {'direction': dir} }); // a okay
         document.dispatchEvent(SlideNavigation);
 
         const animateShapeIn = anime({
@@ -342,21 +347,27 @@ class Slideshow {
 
 
 var MenuStep = function(ev) {
-    var dir = ev.detail;
+    var dir = ev.detail.direction;
+    var number = ev.detail.number;
+
+    //if (dir == undefined) return; 
+
     var numSlides = document.getElementById("slide--backgrounds").childElementCount;
 
     if (dir == "next") {
         window.currentSlide++;
         window.currentSlide = window.currentSlide % (numSlides);
+    } else if (number !== undefined) {
+        window.currentSlide = number;
     } else {
         window.currentSlide--;
         if (window.currentSlide < 0) 
             window.currentSlide = numSlides + window.currentSlide;
     }
 
-    console.log('current slide: ' + window.currentSlide);
-    console.log('direction: ' + dir);
-    console.log('number of slides: ' + numSlides);
+    // console.log('current slide: ' + window.currentSlide);
+    // console.log('direction: ' + dir);
+    // console.log('number of slides: ' + numSlides);
 
     var slides = document.getElementById("slide--navigation").childNodes;
     var currentStep = 0;
