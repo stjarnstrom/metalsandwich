@@ -3,14 +3,7 @@
 /* global Promise:true */
 
 /**
- * demo.js
- * http://www.codrops.com
- *
- * Licensed under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * 
- * Copyright 2017, Codrops
- * http://www.codrops.com
+ * render class
  */
 {
 	setTimeout(() => document.body.classList.add('render'), 60);
@@ -25,17 +18,38 @@
 	}));
 }
 
+/* 
+ * Display Chapter selection
+*/
+
+class ChapterSelection {
+    constructor(el) {
+        this.DOM = {};
+        this.DOM.el = el;
+        this.DOM.slideshow = document.body.querySelector('.slideshow');
+
+        this.init();
+    }
+    init() {
+        this.DOM.el.addEventListener('click', () => this.toggleChapterSelection());
+        this.DOM.slideshow.addEventListener('click', () => this.closeChapterSelection());
+    }
+    toggleChapterSelection() {
+        document.body.classList.toggle('chapter-selection-active')
+    }
+    closeChapterSelection() {
+        if (document.body.classList.contains('chapter-selection-active'))
+            document.body.classList.remove('chapter-selection-active')
+    }
+}
+
+window.ChapterSelection = new ChapterSelection(document.querySelector('.chapter-selection'));
+
 
 
 /**
- * demo2.js
- * http://www.codrops.com
- *
- * Licensed under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * 
- * Copyright 2017, Codrops
- * http://www.codrops.com
+ * Slideshow code
+ * Inspired by http://www.codrops.com
  */
 
 // From https://davidwalsh.name/javascript-debounce-function.
@@ -152,6 +166,10 @@ class Slideshow {
             else if ( keyCode === 39 ) {
                 this.navigate('next');
             }
+
+            if (document.body.classList.contains('chapter-selection-active'))
+                document.body.classList.remove('chapter-selection-active')
+
         });
     }
     /* direct */
@@ -209,7 +227,7 @@ class Slideshow {
                     duration: this.settings.animation.slides.duration,
                     easing: this.settings.animation.slides.easing,
                     // translateY: [dir === 'next' ? -1*this.rect.height : this.rect.height,0]
-                    translateY: [number > this.current ? -1*this.rect.height : this.rect.height,0]
+                    translateY: [(number > this.current) ? -1*this.rect.height : this.rect.height,0]
                 });
     
                 const newSlideImg = newSlide.querySelector('.slide__img');
@@ -220,7 +238,7 @@ class Slideshow {
                     duration: this.settings.animation.slides.duration*3,
                     easing: this.settings.animation.slides.easing,
                     //translateY: [dir === 'next' ? -100 : 100, 0],
-                    translateY: [number > this.current ? -100 : 100, 0],
+                    translateY: [(number > this.current) ? -100 : 100, 0],
                     scale: [0.2,1]
                 });
                 
@@ -232,8 +250,8 @@ class Slideshow {
                     easing: this.settings.animation.slides.easing,
                     //delay: (t,i,total) => dir === 'next' ? i*100+100 : (total-i-1)*100+100,
                     //translateY: [dir === 'next' ? -100 : 100 ,0],
-                    delay: (t,i,total) => number > this.current ? i*100+100 : (total-i-1)*100+100,
-                    translateY: [number > this.current ? -100 : 100 ,0],
+                    delay: (t,i,total) => (number > this.current) ? i*100+100 : (total-i-1)*100+100,
+                    translateY: [(number > this.current) ? -100 : 100 ,0],
                     opacity: [0,1]
                 });
             });

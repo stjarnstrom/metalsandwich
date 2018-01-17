@@ -172,18 +172,6 @@
     margin-right: 0;
 }
 
-.logotype {
-    position: absolute;
-    top: 40px;
-    right: 60px;
-    width: 160px;
-}
-
-.logotype img {
-    width: 100%;
-    height: auto;
-}
-
 .modenav__item {
   display: inline-block;
   background: #000;
@@ -217,4 +205,93 @@
 
 .play-me-symbol {
   width: 120px;
+}
+
+.slidenav {
+  transition: all 0.5s ease;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.slidenav:hover {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.demonstrator .slideshow {
+  transition: transform 0.5s;
+  box-shadow: 0 0 45px rgba(0, 0, 0, 0.4);
+}
+
+.chapter-selection-active .slideshow {
+  transform: scale3d(0.9, 0.9, 1);
+}
+
+
+.logotype {
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  width: 160px;
+}
+
+.logotype img {
+  width: 100%;
+  height: auto;
+}
+
+.chapter-selection {
+  position: absolute;
+  bottom: 32px;
+  right: 48px;
+  width: auto;  
+  cursor: pointer;
+  z-index: 103;
+}
+
+.chapter-selection img {
+  width: 48px;
+  height: auto;
+  transition: 0.25s;
+}
+
+.chapter-selection label {
+  position: absolute;
+  width: auto;
+  white-space: nowrap;
+  right: 60px;
+  bottom: 1.1vw;
+  transition: 0.25s;
+  opacity: 0;
+}
+
+.chapter-selection:hover img {
+  transform: scale3d(1.1, 1.3, 1.0) translateY(-1px) translateX(-8px);
+}
+
+.chapter-selection:hover label {
+  transform: translateX(-24px);
+  opacity: 1;
+}
+
+.chapter-index {
+  display: block;
+  position: absolute;
+  height: 24vh;
+  width: 100%;
+  background: #2d2d41;
+  z-index: 100;
+  bottom: -24vh;
+  transition: all 0.5s;
+  transform: scale3d(1.2, 1.2, 1.2) translateY(25%);
+  box-shadow: 0 0 45px rgba(0, 0, 0, 0.4);
+}
+
+.chapter-selection-active .chapter-index {
+  bottom: 0;
+  transform: scale3d(1.0, 1.0, 1.0);
+}
+
+.demonstrator {
+  overflow: hidden;
 }

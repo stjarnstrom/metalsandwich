@@ -21,10 +21,10 @@ body {
 }
 
 /* Color schemes */
-.demo,
+.demonstrator,
 .demo-6 {
 	--color-text: #fff;
-    --color-bg: #020202;
+    --color-bg: #37373e;
     --color-link: #fff;
     --color-link-hover: #415bf8;
     --color-stitle: #f1f1f1;
@@ -32,6 +32,11 @@ body {
     --fontsize-ssubtitle: 4vw;
     --color-nav: #fff;
     --color-nav-hover: #415bf8;
+}
+
+.demonstrator {
+	background: linear-gradient(#0f2b73, #09012d);
+
 }
 
 /* Fade effect */
